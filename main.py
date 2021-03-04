@@ -3,6 +3,7 @@ import discord
 from dotenv import load_dotenv
 import requests
 import json
+import twitch
 
 load_dotenv()
 token = os.environ.get('DISCORD_TOKEN') 
@@ -30,5 +31,12 @@ async def on_message(message):
 
     if message.content.startswith('$inspire'):
         await message.channel.send(get_quote())
+
+    if message.content.startswith('$busybunni'):
+        await message.channel.send(twitch.get_twitch_profile_pic('busybunni'))
+
+    if message.content.startswith('$isonline'):
+        await message.channel.send(twitch.is_live('busybunni'))
+
 
 client.run(os.environ.get("DISCORD_TOKEN"))
