@@ -108,7 +108,6 @@ def get_streamer_info(streamer):
         print("unable to find {0}'s info".format(streamer))
         return -1
 
-get_streamer_info("pokimane")
 
 def get_game_name(id):
     url = BASE_URL+'games?id={0}'.format(id)
