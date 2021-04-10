@@ -11,6 +11,8 @@ load_dotenv()
 #fox = stream_info.json()
 #print(fox['image'])
 
+
+'''Class to store useful streamer info from'''
 class Streamer:
     def __init__(self,username="",is_live=False,streamer_title="",profile_pic="",game_id=0):
         self.username = username
@@ -21,8 +23,7 @@ class Streamer:
 
 
 
-
-        # API Access Info
+# API Access Info
 CLIENT_ID = os.environ.get('TWITCH_CLIENT_ID')
 CLIENT_SECRET = os.environ.get('TWITCH_CLIENT_SECRET')
 TOKEN = os.environ.get('TWITCH_AUTH_TOKEN')
