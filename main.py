@@ -11,9 +11,10 @@ from dotenv import load_dotenv
 import datetime
 from discord.ext import commands
 from discord import Embed
+import giphy
 
 
-client = commands.Bot(command_prefix='$')
+client = commands.Bot(command_prefix='%')
 
 
 @client.event
@@ -79,7 +80,14 @@ async def play(ctx, arg: str):
 # async def leave(ctx):
 #     await ctx.voice_client.disconnect()
 
-
+@client.command()
+async def gif(ctx,*args):
+    arg_phrase = " ".join(args[:])
+    try:
+        await ctx.send(giphy.send_gif(arg_phrase))
+    except:
+        print(f"Unable to send GIF of {arg_phrase}")
+        await ctx.send(f"No GIF of {arg_phrase} exists...")
 
 # Run the Client
 load_dotenv()
