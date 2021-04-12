@@ -7,11 +7,12 @@ import discord
 from discord.voice_client import VoiceClient
 from discord import message
 from discord.utils import DISCORD_EPOCH
-from dotenv import load_dotenv
-import datetime
 from discord.ext import commands
 from discord import Embed
+from dotenv import load_dotenv
+import datetime
 import giphy
+import nacl
 
 
 client = commands.Bot(command_prefix='%')
@@ -20,6 +21,7 @@ client = commands.Bot(command_prefix='%')
 @client.event
 async def on_ready():
     print(f"Logged in as {client.user}")
+    await client.change_presence(activity=discord.Game(activity=discord.ActivityType.watching, name="Alex struggle to use Twitch's API"))
 
 
 @client.command()
@@ -28,7 +30,7 @@ async def ping(ctx):
 
 
 @client.command()
-async def streamer(ctx, streamer: str, debug=False):
+async def streamer(ctx, streamer: str):
     live_status = twitch.get_live_status(streamer)
     if live_status == True:
         URL = f"https://twitch.tv/{streamer}"
@@ -56,29 +58,14 @@ async def streamerjson(ctx, arg):
         await ctx.send(f"**Found {len(json_list)} Streamers:**\n```{json_list}```")
     except:
         await ctx.send(f"Unable to find streamer {arg}")
-# @client.command()
-# async def embedded(ctx, arg):
-#     test = Embed(title=arg)
-#     await ctx.send(embed=test)
+
+@client.command(pass_context=True)
+async def join(ctx):
+    author = ctx.message.author
+    channel = author.voice.channel
+    await channel.connect()
 
 
-@client.command()
-async def play(ctx, arg: str):
-    try:
-        author = ctx.message.author
-        print(author)
-        channel = author.voice.channel
-        print(channel)
-        await channel.connect() 
-    except:
-        print(f"Unable to join channel {channel.connect().cr_code}")
-# @bot.command()
-# async def join(ctx):
-#     channel = ctx.author.voice.channel
-#     await channel.connect()
-# @bot.command()
-# async def leave(ctx):
-#     await ctx.voice_client.disconnect()
 
 @client.command()
 async def gif(ctx,*args):
