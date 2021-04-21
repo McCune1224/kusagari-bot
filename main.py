@@ -66,6 +66,9 @@ async def join(ctx):
     await channel.connect()
 
 
+@client.command()
+async def leave(ctx):
+
 
 @client.command()
 async def gif(ctx,*args):
