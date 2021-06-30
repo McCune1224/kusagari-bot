@@ -36,7 +36,7 @@ def _generate_token():
     url = 'https://id.twitch.tv/oauth2/token?client_id={0}&client_secret={1}&grant_type=client_credentials'.format(CLIENT_ID, CLIENT_SECRET)
     response = requests.post(url)
     new_token = response.json()
-    return new_token['access_token']
+    print(new_token['access_token'])
 
 '''returns profile picture of streamer'''
 def get_twitch_profile_pic(streamer):
@@ -55,7 +55,7 @@ def get_twitch_profile_pic(streamer):
     return json_data['data'][index]['thumbnail_url']
 
 '''Query the Twitch API for channel info of inputed streamer'''
-def get_live_status(streamer, debug = False):
+def get_live_status(streamer, debug = True):
     #Get JSON Data:
     url = 'https://api.twitch.tv/helix/search/channels?query={0}'.format(streamer)
     response = requests.get(url, headers = HEADERS)
@@ -116,7 +116,6 @@ def get_game_name(id):
     json_data = response.json()
     return (json_data['data'][0]['name'])
 
-get_game_name(33214)
 def _debug_stream(streamer):
     url = 'https://api.twitch.tv/helix/search/channels?query={0}'.format(streamer)
     #  json_data['data'][0]['broadcaster_login'] 
@@ -140,4 +139,8 @@ def _debug_stream(streamer):
 
 
 
-
+if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        get_live_status('hootalin')
+    else:
+        _debug_stream(sys.argv[1])
