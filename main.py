@@ -1,5 +1,7 @@
 import requests
+import time 
 import os
+import sys
 import twitch
 from re import U
 from urllib.parse import uses_fragment
@@ -21,7 +23,7 @@ client = commands.Bot(command_prefix='%')
 @client.event
 async def on_ready():
     print(f"Logged in as {client.user}")
-    await client.change_presence(activity=discord.Game(activity=discord.ActivityType.watching, name="Alex struggle to use Twitch's API"))
+    await client.change_presence(activity=discord.Game(activity=discord.ActivityType.watching, name="Roger Roger"))
 
 
 @client.command()
@@ -63,13 +65,14 @@ async def streamerjson(ctx, arg):
 async def join(ctx):
     author = ctx.message.author
     channel = author.voice.channel
-    await channel.connect()
+    if channel:
+        await channel.connect()
 
 
 @client.command()
 async def leave(ctx):
-
-
+    if ctx.voice_client:
+        await ctx.guild.voice_client.disconnect()
 @client.command()
 async def gif(ctx,*args):
     arg_phrase = " ".join(args[:])
@@ -79,6 +82,24 @@ async def gif(ctx,*args):
         print(f"Unable to send GIF of {arg_phrase}")
         await ctx.send(f"No GIF of {arg_phrase} exists...")
 
+
+droidDir = os.path.join(os.getcwd(), "droidSounds")
+@client.command()
+async def roger(ctx, phrase="roger"):
+        author = ctx.message.author
+        voice_channel = author.voice.channel
+        if voice_channel != None:
+            vc = await voice_channel.connect()
+            vc.play(discord.FFmpegPCMAudio(source=os.path.join(droidDir, phrase+".mp3")))
+            # Sleep while audio is playing.
+            while vc.is_playing():
+                time.sleep(.1)
+            await vc.disconnect()
+        else:
+            await ctx.send(str(ctx.author.name) + "is not in a channel.")
+        # await ctx.message.delete()
+
+
 # Run the Client
 load_dotenv()
-client.run(os.environ.get("DISCORD_TOKEN"))
+client.run(os.environ.get("DISCORD_TOKEN"))/home/alexm/Projects/kusagari-bot/droidSounds/roger.mp3
