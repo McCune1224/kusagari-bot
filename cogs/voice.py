@@ -9,12 +9,7 @@ import giphyAPI
 
 
 
-import os
-import discord
-from discord.utils import DISCORD_EPOCH
-from discord.ext import commands
-from dotenv import load_dotenv
-import nacl
+
 
 
 class VoiceChat(commands.Cog):
@@ -43,6 +38,7 @@ class VoiceChat(commands.Cog):
             print(f"Unable to send GIF of {arg_phrase}")
             await ctx.send(f"No GIF of {arg_phrase} exists...")
 
+    #Need to find windows solution for ffmpeg
     @commands.command()
     async def roger(self, ctx, phrase="roger"):
         author = ctx.message.author
