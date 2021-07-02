@@ -20,7 +20,7 @@ import nacl
 class VoiceChat(commands.Cog):
     def __init__(self, client):
         self.client = client
-        self.droidDir = os.path.join(os.getcwd(), "droidSounds")
+        self.droidDir = os.path.join(os.getcwd(), "droidMedia")
 
     @commands.command(pass_context=True)
     async def join(self, ctx):
@@ -34,15 +34,7 @@ class VoiceChat(commands.Cog):
         if ctx.voice_client:
             await ctx.guild.voice_client.disconnect()
 
-    @commands.command()
-    async def gif(self, ctx, *args):
-        arg_phrase = " ".join(args[:])
-        try:
-            await ctx.send(giphyAPI.send_gif(arg_phrase))
-        except:
-            print(f"Unable to send GIF of {arg_phrase}")
-            await ctx.send(f"No GIF of {arg_phrase} exists...")
-
+    
     @commands.command()
     async def roger(self, ctx, phrase="roger"):
         author = ctx.message.author
