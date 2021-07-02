@@ -1,10 +1,8 @@
 import os
 import discord
 from discord.voice_client import VoiceClient
-from discord.utils import DISCORD_EPOCH
 from discord.ext import commands
 from dotenv import load_dotenv
-import nacl
 
 
 client = commands.Bot(command_prefix='%')
@@ -35,9 +33,6 @@ async def on_ready():
 @client.command()
 async def ping(ctx):
     await ctx.send(f"Input received {round(client.latency)*1000}ms")
-
-
-
 
 
 
