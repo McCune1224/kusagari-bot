@@ -18,9 +18,13 @@ async def unload(ctx, extention):
     client.unload_extension(f"cogs.{extention}")
 
 @client.command()
-async def reload(ctx, extention):
-    client.unload_extension(f"cogs.{extention}")
-    client.load_extension(f"cogs.{extention}")
+async def reload(ctx):
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            print(f"Reloaded {filename[:-3]}")
+            client.unload_extension(f"cogs.{filename[:-3]}")
+            client.load_extension(f"cogs.{filename[:-3]}")
+
 
 @client.event
 async def on_ready():
