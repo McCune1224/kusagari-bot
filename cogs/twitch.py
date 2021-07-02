@@ -39,5 +39,10 @@ class Twitch(commands.Cog):
         except:
             await ctx.send(f"Unable to find streamer {arg}")   
 
+    @commands.command()
+    async def streamerObject(self, ctx, arg):
+        streamer = twitchAPI.get_streamer_info(arg)
+        await ctx.send()
+
 def setup(client):
     client.add_cog(Twitch(client))

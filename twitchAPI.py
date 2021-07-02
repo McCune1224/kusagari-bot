@@ -14,7 +14,7 @@ load_dotenv()
 
 '''Class to store useful streamer info from'''
 class Streamer:
-    def __init__(self,username="",is_live=False,streamer_title="",profile_pic="",game_id=0):
+    def __init__(self,username=" ",is_live=False,streamer_title="title",profile_pic=" ",game_id=0):
         self.username = username
         self.is_live = is_live
         self.stream_title = streamer_title
