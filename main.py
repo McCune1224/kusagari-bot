@@ -7,16 +7,11 @@ from dotenv import load_dotenv
 
 client = commands.Bot(command_prefix='%')
 
-@client.command()
-async def load(ctx, extention):
-    client.load_extension(f"cogs.{extention}")
+
+
 
 @client.command()
-async def unload(ctx, extention):
-    client.unload_extension(f"cogs.{extention}")
-
-@client.command()
-async def reload(ctx):
+async def reload(ctx, description="Reload features and their commands!"):
     for filename in os.listdir('./cogs'):
         if filename.endswith('.py'):
             print(f"Reloaded {filename[:-3]}")
@@ -27,16 +22,9 @@ async def reload(ctx):
 @client.event
 async def on_ready():
     print(f"Logged in as {client.user}")
-    await client.change_presence(activity=discord.Game(activity=discord.ActivityType.watching, name="Roger Roger"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="to Your Commands! Get started with %help"))
 
-
-@client.command()
-async def ping(ctx):
-    await ctx.send(f"Input received {round(client.latency)*1000}ms")
-
-
-
-#Read for available Cogs
+# Read for available Cogs upon startup
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f"cogs.{filename[:-3]}")

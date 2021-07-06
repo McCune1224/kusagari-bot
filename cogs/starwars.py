@@ -11,6 +11,8 @@ class StarWars(commands.Cog):
 
     @commands.command()
     async def swcharacter(self,ctx, character):
+        """Using the SWAPI, fetch a character's JSON info and return it as a formatted embeded message"""
+
         personSearch = f"people/?search={character}"
         swapiInfo = requests.get(self.swapiURL+personSearch) 
         if swapiInfo.status_code != 200:

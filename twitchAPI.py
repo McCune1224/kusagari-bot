@@ -138,9 +138,3 @@ def _debug_stream(streamer):
 #--header 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'
 
 
-
-if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        get_live_status('hootalin')
-    else:
-        _debug_stream(sys.argv[1])
