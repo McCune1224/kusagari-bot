@@ -97,6 +97,7 @@ def imageToAscii(image, cols = 80, scale = 0.8, complex=False):
 
     print(f"ASCII art written to {out_file}") 
 if __name__ == "__main__":
-    image = imageDownload("https://keithp.com/~keithp/talks/xr_ols2003/html/tux_head_raster_4x.png")
+    image_source = input("insert image url:")
+    image = imageDownload(image_source)
     imageToAscii(image)
     

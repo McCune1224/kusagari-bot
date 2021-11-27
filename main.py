@@ -22,7 +22,7 @@ async def reload(ctx, description="Reload features and their commands!"):
 @client.event
 async def on_ready():
     print(f"Logged in as {client.user}")
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="to Your Commands! Get started with %help"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name="to Your Commands! %help for info"))
 
 # Read for available Cogs upon startup
 for filename in os.listdir('./cogs'):

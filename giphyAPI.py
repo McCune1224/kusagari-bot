@@ -20,7 +20,7 @@ def search_gif(query):
         print(f"Exception was called when searching for {query}:\n{e}")
 
 def send_gif(phrase):
-    gifs = _search_gif(phrase)
+    gifs = search_gif(phrase)
     response = random.choices(list(gifs.data))
     return response[0].url
 
