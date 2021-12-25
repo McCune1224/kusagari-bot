@@ -39,11 +39,6 @@ def _generate_token():
     print(new_token['access_token'])
 
 
-#curl --location --request
-#GET 'https://api.twitch.tv/helix/search/channels?query=a_seagull' \
-#--header 'client-id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \
-#--header 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'
-
 
 eventSubURL = "https://api.twitch.tv/helix/eventsub/subscriptions"
 
